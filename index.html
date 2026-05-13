@@ -3,140 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BlockBridge | BlockBlock</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Curated XRPL Agent App Store</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="hero">
-    <nav class="nav">
-      <div class="brand">BlockBridge</div>
-      <div class="pill">Team BlockBlock</div>
-    </nav>
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <div class="tag">XRPL Testnet PoC</div>
-        <h1>해외 B2B 정산을<br>더 빠르고 투명하게</h1>
-        <p>
-          BlockBridge는 국내 수출입 SMB를 위한 XRPL 기반 에스크로 정산 서비스입니다.
-          느린 해외 정산, 높은 수수료, 거래 신뢰 문제를 조건부 정산 구조로 해결합니다.
-        </p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#demo">데모 보기</a>
-          <a class="btn secondary" href="https://testnet.xrpl.org/accounts/rs1txDg154xTwvubiZbxNgNBV42JnHFaaS" target="_blank" rel="noreferrer">XRPL 주소 확인</a>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="status">Settlement Ready</div>
-        <h3>거래 #BB-2026-001</h3>
-        <ul>
-          <li><span>판매자</span><strong>Korea Export SMB</strong></li>
-          <li><span>구매자</span><strong>SEA Distributor</strong></li>
-          <li><span>거래 금액</span><strong>12,500 RLUSD</strong></li>
-          <li><span>상태</span><strong class="accent">Escrow Pending</strong></li>
-        </ul>
-      </div>
+  <header>
+    <div class="header-inner">
+      <span class="logo">🔷 XRPL Agent Store</span>
+      <span class="team-badge">BlockBlock · KFIP 2026</span>
     </div>
   </header>
 
-  <main>
-    <section class="section grid-3">
-      <div class="card small">
-        <h3>문제 1</h3>
-        <p>해외 대금 정산이 느려 자금 회전이 지연됩니다.</p>
-      </div>
-      <div class="card small">
-        <h3>문제 2</h3>
-        <p>중개기관이 많아 비용 구조가 복잡하고 예측이 어렵습니다.</p>
-      </div>
-      <div class="card small">
-        <h3>문제 3</h3>
-        <p>선지급·후지급 모두 거래 상대방 리스크가 남아 있습니다.</p>
-      </div>
-    </section>
+  <section class="hero">
+    <h1>신뢰할 수 있는 AI 에이전트만<br>마켓플레이스에 올라옵니다</h1>
+    <p class="sub">관리자 승인 + XRPL DID + XRPL Credential, 세 가지를 모두 통과한 에이전트만 결제·사용이 가능합니다.</p>
+    <div class="flow-bar">
+      <span>제출</span><span class="arrow">→</span>
+      <span>관리자 검토</span><span class="arrow">→</span>
+      <span>DID / Credential</span><span class="arrow">→</span>
+      <span>마켓플레이스 노출</span><span class="arrow">→</span>
+      <span>사용 / 결제</span><span class="arrow">→</span>
+      <span>평판 기록</span>
+    </div>
+  </section>
 
-    <section class="section solution">
-      <div>
-        <div class="eyebrow">Solution</div>
-        <h2>XRPL 기반 조건부 에스크로 정산</h2>
-        <p>
-          구매자가 대금을 예치하고, 납품 또는 검수 조건이 충족되면 정산이 완료됩니다.
-          단순 송금이 아니라 거래 조건이 반영된 B2B 정산 인프라를 지향합니다.
-        </p>
-      </div>
-      <div class="features">
-        <div class="feature">빠른 정산 흐름</div>
-        <div class="feature">투명한 거래 이력</div>
-        <div class="feature">거래 상대방 리스크 완화</div>
-        <div class="feature">향후 API 확장 가능</div>
-      </div>
-    </section>
-
-    <section class="section" id="demo">
-      <div class="section-head">
-        <div class="eyebrow">Demo Flow</div>
-        <h2>클릭형 MVP 데모</h2>
-        <p>아래 버튼을 누르면 거래 상태가 단계별로 바뀝니다.</p>
-      </div>
-
-      <div class="demo-shell">
-        <div class="demo-left card">
-          <div class="stepper">
-            <button class="step-btn active" data-step="0">1. 거래 생성</button>
-            <button class="step-btn" data-step="1">2. 에스크로 예치</button>
-            <button class="step-btn" data-step="2">3. 납품 확인</button>
-            <button class="step-btn" data-step="3">4. 정산 완료</button>
-          </div>
-          <div id="step-content"></div>
-        </div>
-
-        <div class="demo-right">
-          <div class="card summary">
-            <div class="eyebrow">Current Status</div>
-            <h3 id="status-title">Transaction Created</h3>
-            <p id="status-desc">구매자와 판매자가 거래 조건을 등록한 상태입니다.</p>
-            <span class="badge" id="status-badge">Created</span>
-          </div>
-
-          <div class="card wallet">
-            <div class="eyebrow">XRPL Usage</div>
-            <h3>XRPL Testnet 지갑</h3>
-            <p class="wallet-address">rs1txDg154xTwvubiZbxNgNBV42JnHFaaS</p>
-            <a href="https://testnet.xrpl.org/accounts/rs1txDg154xTwvubiZbxNgNBV42JnHFaaS" target="_blank" rel="noreferrer">Explorer에서 확인하기</a>
-            <p class="note">현재 본 프로젝트는 XRPL Testnet 기반 PoC/MVP 단계입니다.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section grid-2">
+  <section class="section" id="problem">
+    <h2>해결하는 문제</h2>
+    <div class="cards">
       <div class="card">
-        <div class="eyebrow">Business Value</div>
-        <h3>왜 필요한가</h3>
-        <ul class="list">
-          <li>정산 소요시간 단축</li>
-          <li>거래 상태와 이력의 가시성 확보</li>
-          <li>중소기업의 현금흐름 부담 완화</li>
-          <li>향후 B2B 플랫폼용 정산 API로 확장 가능</li>
-        </ul>
+        <div class="card-icon">⚠️</div>
+        <h3>신뢰 없는 오픈 레지스트리</h3>
+        <p>누구나 등록 가능한 AI 에이전트 마켓플레이스는 허위·악성 서비스로 인한 리스크를 통제하기 어렵습니다.</p>
       </div>
       <div class="card">
-        <div class="eyebrow">Submission Info</div>
-        <h3>KFIP 2026 제출용 정보</h3>
-        <ul class="list">
-          <li>팀명: BlockBlock</li>
-          <li>대표자: 심민기</li>
-          <li>프로젝트: BlockBridge</li>
-          <li>진행단계: MVP 개발</li>
-        </ul>
+        <div class="card-icon">🔓</div>
+        <h3>검증 없는 결제</h3>
+        <p>신뢰 검증 없이 바로 결제 요구가 발생하는 구조는 사용자와 운영자 모두에게 부담이 됩니다.</p>
       </div>
-    </section>
-  </main>
+      <div class="card">
+        <div class="card-icon">📉</div>
+        <h3>평판의 불투명성</h3>
+        <p>실제 결제 완료 이용에 근거하지 않은 평판은 신뢰 지표로 활용하기 어렵습니다.</p>
+      </div>
+    </div>
+  </section>
 
-  <footer class="footer">
-    <p>Built by BlockBlock for Korea Financial Innovation Program 2026</p>
+  <section class="section alt" id="solution">
+    <h2>XRPL 기반 신뢰 게이트 구조</h2>
+    <p class="section-desc">BlockBlock의 Curated XRPL Agent App Store는 에이전트가 마켓플레이스에 노출되려면 세 가지 조건을 모두 충족해야 하는 Trust Gate를 적용합니다.</p>
+    <div class="trust-gate">
+      <div class="gate-item approved">
+        <span class="gate-icon">✅</span>
+        <strong>관리자 승인</strong>
+        <small>Admin Review 통과</small>
+      </div>
+      <div class="gate-plus">+</div>
+      <div class="gate-item did">
+        <span class="gate-icon">🪪</span>
+        <strong>XRPL DID 증거</strong>
+        <small>DIDSet tx 등록</small>
+      </div>
+      <div class="gate-plus">+</div>
+      <div class="gate-item cred">
+        <span class="gate-icon">🎫</span>
+        <strong>XRPL Credential 수락</strong>
+        <small>CredentialAccept 증거</small>
+      </div>
+      <div class="gate-result">
+        <span>→</span>
+        <div class="gate-item result">
+          <span class="gate-icon">🏪</span>
+          <strong>마켓플레이스 노출</strong>
+          <small>+ 결제 / 평판 가능</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="demo">
+    <h2>데모: MVP 흐름 시연</h2>
+    <p class="section-desc">아래 버튼을 순서대로 클릭하면 에이전트 등록부터 결제·평판까지의 흐름을 확인할 수 있습니다.</p>
+    <div class="demo-steps">
+      <div class="step" id="step1">
+        <div class="step-header">
+          <span class="step-num">1</span>
+          <span class="step-title">에이전트 제출</span>
+          <span class="step-status" id="s1">대기</span>
+        </div>
+        <p>Provider가 에이전트 메타데이터와 서비스 정보를 제출합니다.</p>
+        <button onclick="runStep(1)">제출하기</button>
+        <div class="step-result" id="r1"></div>
+      </div>
+
+      <div class="step" id="step2">
+        <div class="step-header">
+          <span class="step-num">2</span>
+          <span class="step-title">관리자 검토 + DID / Credential 등록</span>
+          <span class="step-status" id="s2">대기</span>
+        </div>
+        <p>Admin이 제출을 승인하고, XRPL DIDSet 및 CredentialCreate·CredentialAccept 증거를 등록합니다.</p>
+        <button onclick="runStep(2)" disabled>승인 + 증거 등록</button>
+        <div class="step-result" id="r2"></div>
+      </div>
+
+      <div class="step" id="step3">
+        <div class="step-header">
+          <span class="step-num">3</span>
+          <span class="step-title">마켓플레이스 노출 확인</span>
+          <span class="step-status" id="s3">대기</span>
+        </div>
+        <p>Trust Gate를 통과한 에이전트만 마켓플레이스에 노출됩니다. 미통과 에이전트는 자동으로 제외됩니다.</p>
+        <button onclick="runStep(3)" disabled>마켓플레이스 확인</button>
+        <div class="step-result" id="r3"></div>
+      </div>
+
+      <div class="step" id="step4">
+        <div class="step-header">
+          <span class="step-num">4</span>
+          <span class="step-title">사용 · x402 결제 · 평판 기록</span>
+          <span class="step-status" id="s4">대기</span>
+        </div>
+        <p>사용자가 에이전트 서비스를 선택하면 Trust Gate 검증 후 x402/XRPL testnet 결제 요구가 생성됩니다. 결제 완료 후 평판이 기록됩니다.</p>
+        <button onclick="runStep(4)" disabled>사용 / 결제 / 평판</button>
+        <div class="step-result" id="r4"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="xrpl">
+    <h2>XRPL 활용</h2>
+    <div class="xrpl-grid">
+      <div class="xrpl-item">
+        <strong>🪪 XRPL DIDSet</strong>
+        <p>에이전트 신원 증거를 XRPL 트랜잭션으로 등록합니다. tx hash, account binding, network 정보를 그대로 보존합니다.</p>
+      </div>
+      <div class="xrpl-item">
+        <strong>🎫 XRPL Credential</strong>
+        <p>CredentialCreate + CredentialAccept 두 단계가 모두 완료되어야 유효한 신뢰 증거로 인정합니다.</p>
+      </div>
+      <div class="xrpl-item">
+        <strong>💳 x402 / XRPL 결제</strong>
+        <p>Trust Gate를 통과한 에이전트에 한해서만 x402 기반 XRPL testnet 결제 요구가 생성됩니다.</p>
+      </div>
+      <div class="xrpl-item">
+        <strong>⭐ Paid-use 평판</strong>
+        <p>실제 결제 완료된 이용에만 feedback/reputation을 연결합니다. 결제 없는 평판은 생성되지 않습니다.</p>
+      </div>
+    </div>
+    <div class="wallet-box">
+      <span class="wallet-label">XRPL Testnet 지갑 주소</span>
+      <code>rs1txDg154xTwvubiZbxNgNBV42JnHFaaS</code>
+      <a href="https://testnet.xrpl.org/accounts/rs1txDg154xTwvubiZbxNgNBV42JnHFaaS" target="_blank">Explorer에서 확인 →</a>
+    </div>
+  </section>
+
+  <section class="section" id="info">
+    <h2>프로젝트 정보</h2>
+    <div class="info-grid">
+      <div><span>팀</span><strong>BlockBlock</strong></div>
+      <div><span>서비스</span><strong>Curated XRPL Agent App Store</strong></div>
+      <div><span>단계</span><strong>MVP 개발 중 (XRPL Testnet)</strong></div>
+      <div><span>GitHub</span><a href="https://github.com/BlockBlockYonsei/kfip2026-test" target="_blank">BlockBlockYonsei/kfip2026-test</a></div>
+      <div><span>웹 데모</span><a href="https://kfip-xrpl-tau.vercel.app" target="_blank">kfip-xrpl-tau.vercel.app</a></div>
+      <div><span>데모 영상</span><a href="https://www.youtube.com/watch?v=i4wmHCnx44" target="_blank">YouTube 링크</a></div>
+    </div>
+    <p class="disclaimer">본 프로토타입은 XRPL Testnet 기반 PoC/MVP입니다. Mainnet 및 실제 자산은 사용하지 않습니다.</p>
+  </section>
+
+  <footer>
+    <p>BlockBlock · Korea Financial Innovation Program 2026 · XRPL Testnet Only</p>
   </footer>
 
   <script src="script.js"></script>
