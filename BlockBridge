@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlockBridge - B2B 국경간 결제 에스크로</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { dark: '#0A192F', light: '#F8FAFC', accent: '#10B981', hover: '#059669' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-brand-light text-gray-800">
+
+    <!-- 1. Hero Section -->
+    <header class="bg-brand-dark text-white py-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="px-3 py-1 bg-brand-accent/20 text-brand-accent rounded-full text-sm font-semibold tracking-wide border border-brand-accent/30">Korea Financial Innovation Program 2026</span>
+            <h1 class="mt-6 text-5xl font-bold leading-tight">글로벌 B2B 결제의 새로운 표준,<br><span class="text-brand-accent">BlockBridge</span></h1>
+            <p class="mt-6 text-xl text-gray-300">중소 수출입 기업을 위한 XRPL 기반 초고속 에스크로 정산 솔루션</p>
+        </div>
+    </header>
+
+    <!-- 2. Problem & 3. Solution Section -->
+    <section class="py-16 px-6 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- Problem -->
+            <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-red-400">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">기존 무역 결제의 한계</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start"><span class="text-red-500 mr-2">✕</span> <span><b>느린 송금 속도:</b> 중개 은행을 거치며 최대 5일 이상 소요</span></li>
+                    <li class="flex items-start"><span class="text-red-500 mr-2">✕</span> <span><b>높은 수수료:</b> 환전 및 다중 수수료로 마진 악화</span></li>
+                    <li class="flex items-start"><span class="text-red-500 mr-2">✕</span> <span><b>낮은 신뢰도:</b> 선지급/후지급에 따른 거래 상대방 리스크</span></li>
+                    <li class="flex items-start"><span class="text-red-500 mr-2">✕</span> <span><b>자금 유동성 악화:</b> 대금 묶임으로 인한 Cash-flow 부담</span></li>
+                </ul>
+            </div>
+            <!-- Solution -->
+            <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-accent">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">BlockBridge의 혁신</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start"><span class="text-brand-accent mr-2">✓</span> <span><b>초고속 정산:</b> XRPL 네트워크를 통한 단 3초 이내 결제</span></li>
+                    <li class="flex items-start"><span class="text-brand-accent mr-2">✓</span> <span><b>수수료 절감:</b> 복잡한 중개자 없는 다이렉트 송금</span></li>
+                    <li class="flex items-start"><span class="text-brand-accent mr-2">✓</span> <span><b>에스크로 신뢰:</b> 스마트 컨트랙트 기반 자금 보호</span></li>
+                    <li class="flex items-start"><span class="text-brand-accent mr-2">✓</span> <span><b>투명한 내역:</b> 블록체인 원장을 통한 위변조 불가능한 기록</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Demo Flow Section -->
+    <section class="bg-gray-100 py-16 px-6">
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+            <!-- App Header -->
+            <div class="bg-brand-dark px-6 py-4 flex justify-between items-center text-white">
+                <div class="font-bold text-xl flex items-center">
+                    <span class="w-3 h-3 bg-brand-accent rounded-full mr-2"></span> BlockBridge App
+                </div>
+                <div class="text-sm bg-gray-800 px-3 py-1 rounded-md border border-gray-700">환경: <span class="text-brand-accent font-semibold">XRPL Testnet</span></div>
+            </div>
+
+            <div class="p-8">
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between text-sm font-semibold text-gray-500 mb-2" id="step-labels">
+                        <span class="text-brand-accent">1. 거래 생성</span>
+                        <span>2. 에스크로 예치</span>
+                        <span>3. 배송 검수</span>
+                        <span>4. 정산 완료</span>
+                    </div>
+                    <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="h-full bg-brand-accent transition-all duration-500" style="width: 25%;"></div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Content Area -->
+                <div id="demo-content" class="min-h-[300px]">
+                    <!-- Step 1: Create -->
+                    <div id="step-1" class="fade-in">
+                        <h2 class="text-2xl font-bold mb-4">새로운 무역 거래 생성</h2>
+                        <div class="space-y-4 bg-gray-50 p-6 rounded-xl border border-gray-200">
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-500">수입업체 (Buyer)</span><span class="font-bold">Korea Electronics (KR)</span>
+                            </div>
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-500">수출업체 (Seller)</span><span class="font-bold">Global Tech Inc. (US)</span>
+                            </div>
+                            <div class="flex justify-between border-b pb-2">
+                                <span class="text-gray-500">계약 금액</span><span class="font-bold text-lg text-brand-dark">$50,000 USD (상당 XRP)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Deposit (Hidden) -->
+                    <div id="step-2" class="fade-in hidden">
+                        <h2 class="text-2xl font-bold mb-4">에스크로 자금 예치</h2>
+                        <div class="bg-blue-50 border border-blue-200 text-blue-800 p-4 rounded-lg mb-6 flex items-center">
+                            <svg class="w-6 h-6 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            수입업체가 에스크로 스마트 컨트랙트에 대금을 예치합니다.
+                        </div>
+                        <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+                            <p class="text-gray-500 text-sm mb-1">에스크로 락업 금액</p>
+                            <p class="text-3xl font-bold text-brand-dark mb-4">102,450 XRP</p>
+                            <span class="px-4 py-2 bg-yellow-100 text-yellow-800 font-bold rounded-full text-sm">상태: [에스크로 대기중]</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Confirm (Hidden) -->
+                    <div id="step-3" class="fade-in hidden">
+                        <h2 class="text-2xl font-bold mb-4">배송 및 검수 확인</h2>
+                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 font-medium">B/L (선하증권) 업로드</span>
+                                <span class="text-brand-accent font-bold">✓ 확인됨</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 font-medium">수입항 도착 및 세관 통과</span>
+                                <span class="text-brand-accent font-bold">✓ 확인됨</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 font-medium">최종 물품 검수 승인</span>
+                                <span class="text-brand-accent font-bold">✓ 승인 완료</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <span class="px-4 py-2 bg-blue-100 text-blue-800 font-bold rounded-full text-sm">상태: [조건 충족 - 정산 가능]</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Settlement (Hidden) -->
+                    <div id="step-4" class="fade-in hidden">
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center justify-center w-16 h-16 bg-brand-accent text-white rounded-full mb-4">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <h2 class="text-3xl font-bold text-brand-dark">Settlement Complete</h2>
+                            <p class="text-gray-500 mt-2">에스크로가 해제되어 수출업체로 대금이 지급되었습니다.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-sm overflow-hidden">
+                            <div class="flex justify-between mb-2"><span class="text-gray-500">지급액:</span><span class="font-bold text-brand-accent">102,450 XRP</span></div>
+                            <div class="flex justify-between mb-2"><span class="text-gray-500">트랜잭션 해시:</span><span class="font-mono text-xs text-gray-600 break-all">E8F3C...A921B</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500">소요 시간:</span><span class="font-bold">2.8초</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="mt-8 text-center border-t border-gray-200 pt-6">
+                    <button id="action-btn" onclick="nextStep()" class="bg-brand-dark hover:bg-brand-hover text-white font-bold py-3 px-10 rounded-full transition-colors shadow-lg text-lg">
+                        거래 생성하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. XRPL Usage Section & 6. Business Value Section -->
+    <section class="py-16 px-6 max-w-5xl mx-auto">
+        <div class="bg-brand-dark text-white rounded-2xl p-8 shadow-xl flex flex-col md:flex-row items-center justify-between mb-12">
+            <div class="mb-6 md:mb-0 md:mr-6">
+                <h3 class="text-xl font-bold text-brand-accent mb-2">XRPL Testnet 스마트 컨트랙트</h3>
+                <p class="text-sm text-gray-300 mb-4">본 데모는 XRPL Testnet을 활용하여 자산 이동과 에스크로 기능을 구현한 PoC(개념 증명)입니다.</p>
+                <div class="bg-gray-800 p-3 rounded text-sm font-mono break-all text-gray-300 border border-gray-700">
+                    <span class="text-gray-400">Escrow Account:</span><br>
+                    rs1txDg154xTwvubiZbxNgNBV42JnHFaaS
+                </div>
+            </div>
+            <a href="https://testnet.xrpl.org/accounts/rs1txDg154xTwvubiZbxNgNBV42JnHFaaS" target="_blank" rel="noopener noreferrer" class="shrink-0 bg-transparent border-2 border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white font-bold py-2 px-6 rounded transition-colors">
+                익스플로러에서 확인 ↗
+            </a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                <div class="text-3xl mb-3">⚡️</div><div class="font-bold text-gray-800">결제 리드타임 제로</div>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                <div class="text-3xl mb-3">🔍</div><div class="font-bold text-gray-800">100% 자금 투명성</div>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                <div class="text-3xl mb-3">🛡️</div><div class="font-bold text-gray-800">상대방 리스크 제거</div>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                <div class="text-3xl mb-3">🔌</div><div class="font-bold text-gray-800">B2B 플랫폼 API 연동</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer class="bg-gray-900 text-gray-400 text-center py-8">
+        <p class="font-bold text-white mb-2">Team BlockBlock</p>
+        <p class="text-sm">© 2026 Korea Financial Innovation Program Demo.</p>
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+        
+        const buttonTexts = [
+            "거래 생성하기",
+            "대금 예치하기 (Escrow)",
+            "수취 검수 및 확인",
+            "정산금 지급 실행",
+            "데모 초기화"
+        ];
+
+        function nextStep() {
+            // Hide current step
+            document.getElementById(`step-${currentStep}`).classList.add('hidden');
+            
+            if (currentStep < totalSteps) {
+                currentStep++;
+            } else {
+                currentStep = 1; // Reset demo
+            }
+
+            // Show next step
+            document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+            
+            // Update UI components
+            updateProgressBar();
+            updateLabels();
+            
+            // Update button text
+            document.getElementById('action-btn').innerText = buttonTexts[currentStep - 1];
+            
+            // Button style change on last step
+            if(currentStep === totalSteps) {
+                document.getElementById('action-btn').classList.remove('bg-brand-dark');
+                document.getElementById('action-btn').classList.add('bg-brand-accent');
+            } else {
+                document.getElementById('action-btn').classList.add('bg-brand-dark');
+                document.getElementById('action-btn').classList.remove('bg-brand-accent');
+            }
+        }
+
+        function updateProgressBar() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+        }
+
+        function updateLabels() {
+            const labels = document.getElementById('step-labels').children;
+            for(let i=0; i<labels.length; i++) {
+                if(i < currentStep) {
+                    labels[i].className = "text-brand-accent transition-colors duration-300";
+                } else {
+                    labels[i].className = "text-gray-500 transition-colors duration-300";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
